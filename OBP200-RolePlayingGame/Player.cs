@@ -44,4 +44,8 @@ public abstract class Player
         }
     }
     
+    public void ApplyDamageToPlayer(int dmg)
+    {
+        stats.Health -= Math.Max(0, dmg);
+    }
 }
