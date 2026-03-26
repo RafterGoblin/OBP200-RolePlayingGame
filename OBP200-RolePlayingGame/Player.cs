@@ -33,10 +33,9 @@ public abstract class Player
         {
             int heal = 12;
             int newHp = Math.Min(stats.MaxHealth, stats.Health + heal);
+            Console.WriteLine($"Du dricker en dryck och återfår {newHp - stats.Health} HP.");
             stats.Health = newHp;
             Potion -= 1;
-
-            Console.WriteLine($"Du dricker en dryck och återfår {newHp - hp} HP.");
         }
     }
 }
