@@ -5,9 +5,6 @@ namespace OBP200_RolePlayingGame;
 
 public class Enemy
 {
-    static List<string[]> EnemyTemplates = new List<string[]>();
-
-    
     public Character stats =  new Character();
     
     public Enemy(string race, string name, int health, int attack, int defence, int experience, int gold, Random Rng)
