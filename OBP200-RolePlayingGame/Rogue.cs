@@ -11,5 +11,6 @@ public class Rogue : Player
         stats.Defence = 3;
         stats.Experience = 0;
         stats.Gold = 20;
+        potion = 3;
     }
 }

@@ -10,6 +10,6 @@ public class Warrior : Player
         stats.Defence = 5;
         stats.Experience = 0;
         stats.Gold = 15;
-
+        potion = 2;
     }
 }

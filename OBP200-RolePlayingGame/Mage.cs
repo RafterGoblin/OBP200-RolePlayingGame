@@ -10,5 +10,6 @@ public class Mage : Player
         stats.Defence = 2;
         stats.Experience = 0;
         stats.Gold = 15;
+        potion = 2;
     }
 }
