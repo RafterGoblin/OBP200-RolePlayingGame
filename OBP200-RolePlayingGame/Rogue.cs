@@ -13,6 +13,7 @@ public class Rogue : Player
         stats.Experience = 0;
         stats.Gold = 20;
         Potion = 3;
+        Chance = 0.5;
     }
 
     public override int SpecialAttack(int attack, int enemyDefence, Random Rng)

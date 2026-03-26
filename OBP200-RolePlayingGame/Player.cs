@@ -9,6 +9,7 @@ public abstract class Player
     public int Potion { get; set; }
     public string Inventory { get; set; }
     public Character stats =  new Character();
+    public double Chance { get; set; }
 
     public Player(string name)
     {
@@ -21,7 +22,11 @@ public abstract class Player
 
     
     public abstract int SpecialAttack(int attack, int enemyDefence, Random Rng);
-    
+
+    public bool TryRunAway(Random Rng)
+    {
+        return Rng.NextDouble() < Chance;
+    }
     public void UsePotion()
     {
         if (Potion <= 0)
@@ -38,4 +43,5 @@ public abstract class Player
             Potion -= 1;
         }
     }
+    
 }

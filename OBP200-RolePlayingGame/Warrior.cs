@@ -12,6 +12,7 @@ public class Warrior : Player
         stats.Experience = 0;
         stats.Gold = 15;
         Potion = 2;
+        Chance = 0.25;
     }
     
     public override int SpecialAttack(int attack, int enemyDefence,   Random Rng)
