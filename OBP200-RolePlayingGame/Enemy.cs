@@ -21,7 +21,7 @@ public class Enemy
     }
     
     
-    static void InitEnemyTemplates()
+   /* static void InitEnemyTemplates()
     {
         EnemyTemplates.Clear();
         EnemyTemplates.Add(new[] { "beast", "Vildsvin", "18", "4", "1", "6", "4" });
@@ -29,4 +29,5 @@ public class Enemy
         EnemyTemplates.Add(new[] { "bandit", "Bandit", "16", "6", "1", "8", "6" });
         EnemyTemplates.Add(new[] { "slime", "Geléslem", "14", "3", "0", "5", "3" });
     }
+    */
 }
