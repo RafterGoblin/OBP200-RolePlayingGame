@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace OBP200_RolePlayingGame;
 
-public class Enemy
+public class Enemy : IAttack
 {
     public Character stats =  new Character();
     
@@ -17,6 +17,15 @@ public class Enemy
        stats.Gold = gold + Rng.Next(0, 3);
     }
     
+    public int CalculateDamage(int enemyDefence, Random Rng)
+    {
+        int damageDealt = Math.Max(1, stats.Attack - (enemyDefence / 2)) + Rng.Next(0, 3);
+
+        // Liten chans till "glancing blow" (minskad skada)
+        if (Rng.NextDouble() < 0.1) damageDealt = Math.Max(1, damageDealt - 2);
+
+        return damageDealt;
+    }
     
    /* static void InitEnemyTemplates()
     {

@@ -1,6 +1,6 @@
 ﻿namespace OBP200_RolePlayingGame;
 
-public class Mage : Player
+public class Mage : Player, IAttack
 {
 
     
@@ -16,6 +16,11 @@ public class Mage : Player
         Chance = 0.35;
     }
 
+    public int CalculateDamage(int enemyDefence, Random Rng)
+    {
+        int damageDealt = Math.Max(1, (stats.Attack + 2 - (enemyDefence / 2)) + Rng.Next(0, 3));
+        return Math.Max(1, damageDealt);
+    }
     public override int SpecialAttack(int attack, int enemyDefence,  Random Rng)
     {
         int specialDmg;

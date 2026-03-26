@@ -1,6 +1,6 @@
 ﻿namespace OBP200_RolePlayingGame;
 
-public class Warrior : Player
+public class Warrior : Player, IAttack
 {
    
     public Warrior(string name) : base(name)
@@ -13,6 +13,12 @@ public class Warrior : Player
         stats.Gold = 15;
         Potion = 2;
         Chance = 0.25;
+    }
+    
+    public int CalculateDamage(int enemyDefence, Random Rng)
+    {
+        int damageDealt = Math.Max(1, (stats.Attack + 1 - (enemyDefence / 2)) + Rng.Next(0, 3));
+        return Math.Max(1, damageDealt);
     }
     
     public override int SpecialAttack(int attack, int enemyDefence,   Random Rng)
