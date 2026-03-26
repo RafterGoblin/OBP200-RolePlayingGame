@@ -12,4 +12,13 @@ public class Warrior : Player
         stats.Gold = 15;
         potion = 2;
     }
+    
+    public override int SpecialAttack(int attack, int enemyDefence,   Random Rng)
+    {
+        int specialDmg = 0;
+        Console.WriteLine("Warrior använder Heavy Strike!");
+        specialDmg = Math.Max(2, stats.Attack + 3 - enemyDefence);
+        stats.Health -= 2;
+        return specialDmg;
+    }
 }

@@ -13,4 +13,20 @@ public class Rogue : Player
         stats.Gold = 20;
         potion = 3;
     }
+
+    public override int SpecialAttack(int attack, int enemyDefence, Random Rng)
+    {
+        int specialDmg;
+        if (Rng.NextDouble() < 0.5)
+        {
+            Console.WriteLine("Rogue utför en lyckad Backstab!");
+            specialDmg = Math.Max(4, stats.Attack + 6);
+        }
+        else
+        {
+            Console.WriteLine("Backstab misslyckades!");
+            specialDmg = 1;
+        }
+        return specialDmg;
+    }
 }

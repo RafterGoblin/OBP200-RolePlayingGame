@@ -17,4 +17,7 @@ public abstract class Player
         potion = 1;
         inventory = "Wooden Sword;Cloth Armor";
     }
+
+    public abstract int SpecialAttack(int attack, int enemyDefence, Random Rng);
+    
 }
