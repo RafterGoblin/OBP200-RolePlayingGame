@@ -1,11 +1,13 @@
-﻿namespace OBP200_RolePlayingGame;
+﻿using System.Runtime.InteropServices.ComTypes;
+
+namespace OBP200_RolePlayingGame;
 
 public abstract class Player
 {
     public string ClassType { get; set; }
-    public int level { get; set; }
-    public int potion { get; set; }
-    public string inventory { get; set; }
+    public int Level { get; set; }
+    public int Potion { get; set; }
+    public string Inventory { get; set; }
     public Character stats =  new Character();
 
     public Player(string name)
@@ -13,11 +15,28 @@ public abstract class Player
         stats.Name = name;
         stats.Experience = 0;  
         ClassType = "Player";
-        level = 1;
-        potion = 1;
-        inventory = "Wooden Sword;Cloth Armor";
+        Level = 1;
+        Inventory = "Wooden Sword;Cloth Armor";
     }
 
+    
     public abstract int SpecialAttack(int attack, int enemyDefence, Random Rng);
     
+    public void UsePotion()
+    {
+        if (Potion <= 0)
+        {
+            Console.WriteLine("Du har inga drycker kvar.");
+        }
+        // Helning av spelaren
+        else
+        {
+            int heal = 12;
+            int newHp = Math.Min(stats.MaxHealth, stats.Health + heal);
+            stats.Health = newHp;
+            Potion -= 1;
+
+            Console.WriteLine($"Du dricker en dryck och återfår {newHp - hp} HP.");
+        }
+    }
 }
