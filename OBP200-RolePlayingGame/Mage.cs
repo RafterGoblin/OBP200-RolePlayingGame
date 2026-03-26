@@ -12,7 +12,7 @@ public class Mage : Player
         stats.Defence = 2;
         stats.Experience = 0;
         stats.Gold = 15;
-        potion = 2;
+        Potion = 2;
     }
 
     public override int SpecialAttack(int attack, int enemyDefence,  Random Rng)
