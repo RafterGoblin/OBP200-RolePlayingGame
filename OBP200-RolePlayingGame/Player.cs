@@ -11,8 +11,10 @@ public abstract class Player
     public Player(string name)
     {
         stats.Name = name;
+        stats.Experience = 0;  
         ClassType = "Player";
         level = 1;
         potion = 1;
+        inventory = "Wooden Sword;Cloth Armor";
     }
 }
