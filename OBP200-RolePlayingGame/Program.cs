@@ -7,10 +7,12 @@ class Program
 {
     // ======= Globalt tillstånd  =======
 
+    
     // Spelarens "databas": alla värden som strängar
     // index: 0 Name, 1 Class, 2 HP, 3 MaxHP, 4 ATK, 5 DEF, 6 GOLD, 7 XP, 8 LEVEL, 9 POTIONS, 10 INVENTORY (semicolon-sep)
     static string[] Player = new string[11];
-
+    private static List<Enemy> enemies = new List<Enemy>();
+    private static Player player;
     // Rum: [type, label]
     // types: battle, treasure, shop, rest, boss
     static List<string[]> Rooms = new List<string[]>();
@@ -82,20 +84,16 @@ class Program
         switch (k)
         {
             case "1": // Warrior: tankig
-                cls = "Warrior";
-                maxhp = 40; hp = 40; atk = 7; def = 5; potions = 2; gold = 15;
+                player = new Warrior(name);
                 break;
             case "2": // Mage: hög damage, låg def
-                cls = "Mage";
-                maxhp = 28; hp = 28; atk = 10; def = 2; potions = 2; gold = 15;
+                player = new Mage(name);
                 break;
             case "3": // Rogue: krit-chans
-                cls = "Rogue";
-                maxhp = 32; hp = 32; atk = 8; def = 3; potions = 3; gold = 20;
+                player = new Rogue(name);
                 break;
             default:
-                cls = "Warrior";
-                maxhp = 40; hp = 40; atk = 7; def = 5; potions = 2; gold = 15;
+                player  = new Warrior(name);
                 break;
         }
 
@@ -276,35 +274,27 @@ class Program
         return true;
     }
 
-    static string[] GenerateEnemy(bool isBoss)
+    static Enemy GenerateEnemy(bool isBoss)
     {
         if (isBoss)
         {
             // Boss-mall
-            return new[] { "boss", "Urdraken", "55", "9", "4", "30", "50" };
+            return new Enemy("boss", "Urdraken", 55, 9, 4, 30, 50, Rng );
         }
         else
         {
             // Slumpa bland templates
-            var template = EnemyTemplates[Rng.Next(EnemyTemplates.Count)];
-            
-            // Slmumpmässig justering av stats
-            int hp = ParseInt(template[2], 10) + Rng.Next(-1, 3);
-            int atk = ParseInt(template[3], 3) + Rng.Next(0, 2);
-            int def = ParseInt(template[4], 0) + Rng.Next(0, 2);
-            int xp = ParseInt(template[5], 4) + Rng.Next(0, 3);
-            int gold = ParseInt(template[6], 2) + Rng.Next(0, 3);
-            return new[] { template[0], template[1], hp.ToString(), atk.ToString(), def.ToString(), xp.ToString(), gold.ToString() };
+            var enemy = enemies[Rng.Next(enemies.Count)];
+            return enemy;
         }
     }
 
     static void InitEnemyTemplates()
     {
-        EnemyTemplates.Clear();
-        EnemyTemplates.Add(new[] { "beast", "Vildsvin", "18", "4", "1", "6", "4" });
-        EnemyTemplates.Add(new[] { "undead", "Skelett", "20", "5", "2", "7", "5" });
-        EnemyTemplates.Add(new[] { "bandit", "Bandit", "16", "6", "1", "8", "6" });
-        EnemyTemplates.Add(new[] { "slime", "Geléslem", "14", "3", "0", "5", "3" });
+        enemies.Add(new Enemy("beast", "Vildsvin", 18, 4, 1, 6, 4, Rng ));
+        enemies.Add(new Enemy("undead", "Skelett", 20, 5, 2, 7, 5, Rng ));
+        enemies.Add(new Enemy("bandit", "Bandit", 16, 6, 1, 8, 6, Rng ));
+        enemies.Add(new Enemy("slime", "Geléslem", 14, 3, 0, 5, 3, Rng ));
     }
 
     static int CalculatePlayerDamage(int enemyDef)
