@@ -14,11 +14,23 @@ public class Enemy : IAttack
         Race = race;
         stats.Name = name; 
         stats.Health = health + Rng.Next(-1, 3);
-        stats.Attack = attack +  Rng.Next(0, 2);
+        stats.MaxHealth = stats.Health;
+        stats.Attack = attack + Rng.Next(0, 2);
         stats.Defence = defence + Rng.Next(0, 2);
         stats.Experience = experience +  Rng.Next(0, 3);
         stats.Gold = gold + Rng.Next(0, 3);
     }
+    
+    public void EnemyAppeared()
+    {
+        Console.WriteLine($"En {stats.Name} dyker upp! (HP {stats.Health}, ATK {stats.Attack}, DEF {stats.Defence})");
+    }
+    
+    public string GetName() => stats.Name;
+    public int GetHealth() => stats.Health;
+    public int GetDefence() => stats.Defence;
+    public int GetExperience() => stats.Experience;
+    public int GetGold() => stats.Gold;
     
     public int CalculateDamage(int enemyDefence, Random Rng)
     {
@@ -28,5 +40,14 @@ public class Enemy : IAttack
         if (Rng.NextDouble() < 0.1) damageDealt = Math.Max(1, damageDealt - 2);
 
         return damageDealt;
+    }
+
+    public void ResetHealth()
+    {
+        stats.Health = stats.MaxHealth;
+    }
+    public void TakeDamage(int damageDealt)
+    {
+        stats.Health -= damageDealt;
     }
 }

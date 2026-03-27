@@ -1,6 +1,6 @@
 ﻿namespace OBP200_RolePlayingGame;
 
-public class Warrior : Player, IAttack
+public class Warrior : Player
 {
    
     public Warrior(string name) : base(name)
@@ -15,18 +15,34 @@ public class Warrior : Player, IAttack
         Chance = 0.25;
     }
     
-    public int CalculateDamage(int enemyDefence, Random Rng)
+    public override int CalculateDamage(int enemyDefence, Random Rng)
     {
         int damageDealt = Math.Max(1, (stats.Attack + 1 - (enemyDefence / 2)) + Rng.Next(0, 3));
         return Math.Max(1, damageDealt);
     }
     
-    public override int SpecialAttack(int attack, int enemyDefence,   Random Rng)
+    public override void PlayerLevelUp()
+    {
+        stats.MaxHealth += 6;
+        stats.Attack  += 2;
+        stats.Defence += 2;
+        stats.Health = stats.MaxHealth;
+        Level++;
+        Console.WriteLine($"Du når nivå {Level}! Värden ökade och HP återställd.");
+    }
+    
+    public override int SpecialAttack(int enemyDefence, bool isBoss, Random Rng)
     {
         int specialDmg = 0;
         Console.WriteLine("Warrior använder Heavy Strike!");
         specialDmg = Math.Max(2, stats.Attack + 3 - enemyDefence);
         stats.Health -= 2;
-        return specialDmg;
+        // Dämpa skada mot bossen
+        if (isBoss)
+        {
+            specialDmg = (int)Math.Round(specialDmg * 0.8);
+        }
+
+        return Math.Max(0, specialDmg);
     }
 }

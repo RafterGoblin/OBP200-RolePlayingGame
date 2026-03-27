@@ -1,6 +1,6 @@
 ﻿namespace OBP200_RolePlayingGame;
 
-public class Rogue : Player, IAttack
+public class Rogue : Player
 {
     
     
@@ -16,13 +16,24 @@ public class Rogue : Player, IAttack
         Chance = 0.5;
     }
 
-    public int CalculateDamage(int enemyDefence, Random Rng)
+    public override int CalculateDamage(int enemyDefence, Random Rng)
     {
         int damageDealt = (stats.Attack - (enemyDefence / 2)) + Rng.Next(0, 3);
         damageDealt += (Rng.NextDouble() < 0.2) ? 4 : 0;
         return Math.Max(1, damageDealt);
     }
-    public override int SpecialAttack(int attack, int enemyDefence, Random Rng)
+    
+    public override void PlayerLevelUp()
+    {
+        stats.MaxHealth += 5;
+        stats.Attack  += 3;
+        stats.Defence += 1;
+        stats.Health = stats.MaxHealth;
+        Level++;
+        Console.WriteLine($"Du når nivå {Level}! Värden ökade och HP återställd.");
+    }
+    
+    public override int SpecialAttack(int enemyDefence, bool isBoss, Random Rng)
     {
         int specialDmg;
         if (Rng.NextDouble() < 0.5)
@@ -35,6 +46,11 @@ public class Rogue : Player, IAttack
             Console.WriteLine("Backstab misslyckades!");
             specialDmg = 1;
         }
-        return specialDmg;
+        if (isBoss)
+        {
+            specialDmg = (int)Math.Round(specialDmg * 0.8);
+        }
+
+        return Math.Max(0, specialDmg);
     }
 }
