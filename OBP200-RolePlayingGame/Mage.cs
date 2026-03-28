@@ -8,6 +8,7 @@ public class Mage : Player
     
     public Mage(string Name) : base(Name)
     {
+        ClassType = "Mage";
         stats.Health = 28; 
         stats.MaxHealth = 28;
         stats.Attack = 10;

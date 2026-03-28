@@ -6,6 +6,7 @@ public class Rogue : Player
     
     public Rogue(string name) : base(name)
     {
+        ClassType = "Rogue";
         stats.Health = 32; 
         stats.MaxHealth = 32;
         stats.Attack = 8;

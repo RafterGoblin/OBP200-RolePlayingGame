@@ -5,6 +5,7 @@ public class Warrior : Player
    
     public Warrior(string name) : base(name)
     {
+        ClassType = "Warrior";
         stats.Health = 40; 
         stats.MaxHealth = 40;
         stats.Attack = 7;
