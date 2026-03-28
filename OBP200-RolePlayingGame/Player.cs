@@ -85,9 +85,9 @@ public abstract class Player : IAttack
     }
     public int GetGold() => stats.Gold;
     
-    public void ApplyDamageToPlayer(int dmg)
+    public void ApplyDamageToPlayer(int damage)
     {
-        stats.Health -= Math.Max(0, dmg);
+        stats.Health -= Math.Max(0, damage);
     }
     public void ShowStatus()
     {
