@@ -69,8 +69,6 @@ class Program
         Console.WriteLine("Välj klass: 1) Warrior  2) Mage  3) Rogue");
         Console.Write("Val: ");
         var k = (Console.ReadLine() ?? "").Trim();
-
-        string cls = player.ClassType;
         
         switch (k)
         {
@@ -87,7 +85,7 @@ class Program
                 player  = new Warrior(name);
                 break;
         }
-
+        
         // Initiera karta (linjärt äventyr)
         Rooms.Clear();
         Rooms.Add(new[] { "battle", "Skogsstig" });
@@ -100,7 +98,7 @@ class Program
 
         CurrentRoomIndex = 0;
 
-        Console.WriteLine($"Välkommen, {name} the {cls}!");
+        Console.WriteLine($"Välkommen, {name} the {player.ClassType}!");
         player.ShowStatus();
     }
 
