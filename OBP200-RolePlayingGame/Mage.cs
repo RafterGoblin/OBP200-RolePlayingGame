@@ -24,7 +24,7 @@ public class Mage : Player
         return Math.Max(1, damageDealt);
     }
 
-    public override void PlayerLevelUp()
+    public override void LevelUp()
     {
         stats.MaxHealth += 4;
         stats.Attack  += 4;

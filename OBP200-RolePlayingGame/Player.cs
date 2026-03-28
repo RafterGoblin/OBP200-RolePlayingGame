@@ -23,9 +23,9 @@ public abstract class Player : IAttack
     public abstract int CalculateDamage(int enemyDefence, Random Rng);
 
     public abstract int SpecialAttack(int enemyDefence, bool isBoss, Random Rng);
-    public abstract void PlayerLevelUp();
+    public abstract void LevelUp();
 
-    public bool IsPlayerDead()
+    public bool IsDead()
     {
         return stats.Health <= 0;
     }
@@ -60,17 +60,17 @@ public abstract class Player : IAttack
     public int GetExperience() => stats.Experience;
     public int GetDefence() => stats.Defence;
 
-    public void AddPlayerExperience(int amount)
+    public void AddExperience(int amount)
     {
         stats.Experience += amount;
     }
 
-    public void AddPlayerGold(int amount)
+    public void AddGold(int amount)
     {
         stats.Gold += amount;
     }
 
-    public void RemovePlayerGold(int amount)
+    public void RemoveGold(int amount)
     {
         stats.Gold -= amount;
     }
@@ -85,7 +85,7 @@ public abstract class Player : IAttack
     }
     public int GetGold() => stats.Gold;
     
-    public void ApplyDamageToPlayer(int damage)
+    public void ApplyDamage(int damage)
     {
         stats.Health -= Math.Max(0, damage);
     }

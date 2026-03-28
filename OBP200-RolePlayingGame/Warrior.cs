@@ -21,7 +21,7 @@ public class Warrior : Player
         return Math.Max(1, damageDealt);
     }
     
-    public override void PlayerLevelUp()
+    public override void LevelUp()
     {
         stats.MaxHealth += 6;
         stats.Attack  += 2;

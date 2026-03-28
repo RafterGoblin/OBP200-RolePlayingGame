@@ -113,7 +113,7 @@ class Program
 
             bool continueAdventure = EnterRoom(room[0]);
             
-            if (player.IsPlayerDead())
+            if (player.IsDead())
             {
                 Console.WriteLine("Du har stupat... Spelet över.");
                 break;
@@ -176,9 +176,9 @@ class Program
     static bool DoBattle(bool isBoss)
     {
         var enemy = GenerateEnemy(isBoss);
-        enemy.EnemyAppeared();
+        enemy.Appeared();
 
-        while (enemy.GetHealth() > 0 && !player.IsPlayerDead())
+        while (enemy.GetHealth() > 0 && !player.IsDead())
         {
             Console.WriteLine();
             player.ShowStatus();
@@ -231,11 +231,11 @@ class Program
 
             // Fiendens tur
             int enemyDamage = enemy.CalculateDamage(player.GetDefence(), Rng);
-            player.ApplyDamageToPlayer(enemyDamage);
+            player.ApplyDamage(enemyDamage);
             Console.WriteLine($"{enemy.GetName()} anfaller och gör {enemyDamage} skada!");
         }
 
-        if (player.IsPlayerDead())
+        if (player.IsDead())
         {
             return false; // avsluta äventyr
         }
@@ -276,13 +276,13 @@ class Program
     
     static void AddPlayerXp(int amount)
     {
-        player.AddPlayerExperience(amount);
+        player.AddExperience(amount);
         MaybeLevelUp();
     }
 
     static void AddPlayerGold(int amount)
     {
-        player.AddPlayerGold(amount);
+        player.AddGold(amount);
     }
 
     static void MaybeLevelUp()
@@ -292,7 +292,7 @@ class Program
 
         if (player.GetExperience() >= nextThreshold)
         {
-            player.PlayerLevelUp();
+            player.LevelUp();
         }
     }
 
@@ -320,7 +320,7 @@ class Program
         if (Rng.NextDouble() < 0.5)
         {
             int gold = Rng.Next(8, 15);
-            player.AddPlayerGold(gold);
+            player.AddGold(gold);
             Console.WriteLine($"Kistan innehåller {gold} guld!");
         }
         else
@@ -382,7 +382,7 @@ class Program
         int gold = player.GetGold();
         if (gold >= cost)
         {
-            player.RemovePlayerGold(cost);
+            player.RemoveGold(cost);
             apply();
             Console.WriteLine(successMsg);
         }

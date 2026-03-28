@@ -21,7 +21,7 @@ public class Enemy : IAttack
         stats.Gold = gold + Rng.Next(0, 3);
     }
     
-    public void EnemyAppeared()
+    public void Appeared()
     {
         Console.WriteLine($"En {stats.Name} dyker upp! (HP {stats.Health}, ATK {stats.Attack}, DEF {stats.Defence})");
     }

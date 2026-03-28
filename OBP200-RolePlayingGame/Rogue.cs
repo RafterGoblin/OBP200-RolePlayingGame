@@ -23,7 +23,7 @@ public class Rogue : Player
         return Math.Max(1, damageDealt);
     }
     
-    public override void PlayerLevelUp()
+    public override void LevelUp()
     {
         stats.MaxHealth += 5;
         stats.Attack  += 3;
