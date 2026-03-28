@@ -6,8 +6,7 @@ namespace OBP200_RolePlayingGame;
 class Program
 {
     // ======= Globalt tillstånd  =======
-
-    static string[] Player = new string[11];
+    
     private static List<Enemy> enemies = new List<Enemy>();
     private static Player player;
     // Rum: [type, label]
