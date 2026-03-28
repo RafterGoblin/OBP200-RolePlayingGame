@@ -11,7 +11,7 @@ public abstract class Player : IAttack
     public Character stats =  new Character();
     public double Chance { get; set; }
 
-    public Player(string name)
+    protected Player(string name)
     {
         stats.Name = name;
         stats.Experience = 0;  
