@@ -7,9 +7,6 @@ class Program
 {
     // ======= Globalt tillstånd  =======
 
-    
-    // Spelarens "databas": alla värden som strängar
-    // index: 0 Name, 1 Class, 2 HP, 3 MaxHP, 4 ATK, 5 DEF, 6 GOLD, 7 XP, 8 LEVEL, 9 POTIONS, 10 INVENTORY (semicolon-sep)
     static string[] Player = new string[11];
     private static List<Enemy> enemies = new List<Enemy>();
     private static Player player;
@@ -74,9 +71,7 @@ class Program
         Console.Write("Val: ");
         var k = (Console.ReadLine() ?? "").Trim();
 
-        string cls = "Warrior";
-        int hp = 0, maxhp = 0, atk = 0, def = 0;
-        int potions = 0, gold = 0;
+        string cls = player.ClassType;
         
         switch (k)
         {
@@ -93,19 +88,6 @@ class Program
                 player  = new Warrior(name);
                 break;
         }
-
-        // Fyll player-array
-        Player[0] = name;
-        Player[1] = cls;
-        Player[2] = hp.ToString();
-        Player[3] = maxhp.ToString();
-        Player[4] = atk.ToString();
-        Player[5] = def.ToString();
-        Player[6] = gold.ToString();
-        Player[7] = "0";   // XP
-        Player[8] = "1";   // LEVEL
-        Player[9] = potions.ToString();
-        Player[10] = "Wooden Sword;Cloth Armor"; // inventory som semicolon-separerad sträng
 
         // Initiera karta (linjärt äventyr)
         Rooms.Clear();
@@ -291,34 +273,6 @@ class Program
         enemies.Add(new Enemy("undead", "Skelett", 20, 5, 2, 7, 5, Rng ));
         enemies.Add(new Enemy("bandit", "Bandit", 16, 6, 1, 8, 6, Rng ));
         enemies.Add(new Enemy("slime", "Geléslem", 14, 3, 0, 5, 3, Rng ));
-    }
-
-    static int CalculatePlayerDamage(int enemyDef)
-    {
-        int atk = ParseInt(Player[4], 5);
-        string cls = Player[1] ?? "Warrior";
-
-        // Beräkna grundskada
-        int baseDmg = Math.Max(1, atk - (enemyDef / 2));
-        int roll = Rng.Next(0, 3); // liten variation
-
-        switch (cls.Trim())
-        {
-            case "Warrior":
-                baseDmg += 1; // warrior buff
-                break;
-            case "Mage":
-                baseDmg += 2; // mage buff
-                break;
-            case "Rogue":
-                baseDmg += (Rng.NextDouble() < 0.2) ? 4 : 0; // rogue crit-chans
-                break;
-            default:
-                baseDmg += 0;
-                break;
-        }
-
-        return Math.Max(1, baseDmg + roll);
     }
     
     static void AddPlayerXp(int amount)
