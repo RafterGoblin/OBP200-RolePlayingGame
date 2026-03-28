@@ -301,10 +301,7 @@ class Program
         {
             string item = "Minor Gem";
             if (enemyName.Contains("Urdraken")) item = "Dragon Scale";
-
-            var inv = (player.Inventory ?? "").Trim();
-            if (string.IsNullOrEmpty(inv)) player.Inventory = item;
-            else player.Inventory = inv + ";" + item;
+            player.AddToInventory(item);
 
             Console.WriteLine($"Föremål hittat: {item} (lagt i din väska)");
         }
@@ -325,8 +322,7 @@ class Program
         {
             var items = new[] { "Iron Dagger", "Oak Staff", "Leather Vest", "Healing Herb" };
             string found = items[Rng.Next(items.Length)];
-            var inv = (player.Inventory ?? "").Trim();
-            player.Inventory = string.IsNullOrEmpty(inv) ? found : (inv + ";" + found);
+            player.AddToInventory(found);
             Console.WriteLine($"Du plockar upp: {found}");
         }
         return true;
@@ -348,7 +344,8 @@ class Program
 
             if (val == "1")
             {
-                TryBuy(10, () => player.Potion += 1, "Du köper en dryck.");
+                
+                TryBuy(10, () => player.AddPotion(), "Du köper en dryck.");
             }
             else if (val == "2")
             {
@@ -407,8 +404,7 @@ class Program
             return;
         }
 
-        items = items.Where(x => x != "Minor Gem").ToList();
-        player.Inventory = items.Count == 0 ? "" : string.Join(";", items);
+        player.RemoveItem(items, "Minor Gem");
 
         AddPlayerGold(count * 5);
         Console.WriteLine($"Du säljer {count} st Minor Gem för {count * 5} guld.");

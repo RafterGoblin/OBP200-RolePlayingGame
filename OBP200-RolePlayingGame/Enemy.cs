@@ -5,8 +5,8 @@ namespace OBP200_RolePlayingGame;
 
 public class Enemy : IAttack
 {
-    public Character stats =  new Character();
-    private string Race { get;  set; }
+    private Character stats =  new Character();
+    private string Race { get; set; }
     
     
     public Enemy(string race, string name, int health, int attack, int defence, int experience, int gold, Random Rng)

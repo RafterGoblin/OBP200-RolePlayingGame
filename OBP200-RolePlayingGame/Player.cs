@@ -4,12 +4,12 @@ namespace OBP200_RolePlayingGame;
 
 public abstract class Player : IAttack
 {
-    public string ClassType { get; set; }
+    public string ClassType { get; protected set; }
     public int Level { get; protected set; }
-    public int Potion { get; set; }
-    public string Inventory { get; set; }
-    public Character stats =  new Character();
-    public double Chance { get; set; }
+    public int Potion { get; protected set; }
+    public string Inventory { get; protected set; }
+    protected Character stats =  new Character();
+    public double Chance { get; protected set; }
 
     protected Player(string name)
     {
@@ -60,6 +60,21 @@ public abstract class Player : IAttack
     public int GetExperience() => stats.Experience;
     public int GetDefence() => stats.Defence;
 
+    public void AddToInventory(string item)
+    {
+        if (string.IsNullOrEmpty(Inventory)) Inventory = item;
+        else Inventory = Inventory + ";" + item;
+    }
+
+    public void RemoveItem(List<string> items, string itemToRemove)
+    {
+        items = items.Where(x => x != itemToRemove).ToList();
+        Inventory = items.Count == 0 ? "" : string.Join(";", items);
+    }
+    public void AddPotion()
+    {
+        Potion++;
+    }
     public void AddExperience(int amount)
     {
         stats.Experience += amount;
