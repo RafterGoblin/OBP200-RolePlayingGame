@@ -416,18 +416,4 @@ class Program
         Console.WriteLine($"Du säljer {count} st Minor Gem för {count * 5} guld.");
     }
 
-    // ======= Hjälpmetoder =======
-
-    static int ParseInt(string s, int fallback)
-    {
-        try
-        {
-            int value = Convert.ToInt32(s);
-            return value;
-        }
-        catch (Exception e)
-        {
-            return fallback;
-        }
-    }
 }
